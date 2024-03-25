@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\RazorPagesM.bundle.scp.css"
     },
     {
+      "Id": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\css\\info.css",
+      "PackagePath": "staticwebassets\\css\\info.css"
+    },
+    {
       "Id": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\css\\sign-in.css",
       "PackagePath": "staticwebassets\\css\\sign-in.css"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\js\\info.js",
+      "PackagePath": "staticwebassets\\js\\info.js"
     },
     {
       "Id": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\js\\site.js",

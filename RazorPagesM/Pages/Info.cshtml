@@ -1,4 +1,29 @@
 ﻿@page
 @model MyApp.Namespace.InfoModel
 @{
+    ViewData["Title"] = "Information";
 }
+
+<div id="mainContainer">
+    <button type="button" id="toggleFormButton">Show Form</button>
+    <button type="button" id="toggleInfoButton">Show Information</button>
+
+    <div id="formContainer">
+        <form>
+            <label for="firstNumber">Enter first number:</label>
+            <input type="number" id="firstNumber" /><br /><br />
+
+            <label for="secondNumber">Enter second number:</label>
+            <input type="number" id="secondNumber" /><br /><br />
+
+            <button type="button" id="calculateButton">Calculate Sum</button>
+        </form>
+    </div>
+
+    <div id="infoContainer" style="display:none;">
+        <p>This is CENG-382 Labwork built by Melih Taşkın</p>
+    </div>
+
+    <div id="resultBox" class="result-box"></div>
+</div>
+

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Gh4TAPVR9QGhptFDRm8AW+puLLstBruD+3AXRg/je8I=",
+  "Hash": "L3QLudd72csAteReFeYSVkXsqWXohO5F7bJHbm96MPg=",
   "Source": "RazorPagesM",
   "BasePath": "_content/RazorPagesM",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\RazorPagesM.bundle.scp.css"
+    },
+    {
+      "Identity": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\css\\info.css",
+      "SourceId": "RazorPagesM",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\",
+      "BasePath": "_content/RazorPagesM",
+      "RelativePath": "css/info.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\info.css"
     },
     {
       "Identity": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\css\\sign-in.css",
@@ -110,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\js\\info.js",
+      "SourceId": "RazorPagesM",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\",
+      "BasePath": "_content/RazorPagesM",
+      "RelativePath": "js/info.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\info.js"
     },
     {
       "Identity": "c:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\RazorPagesM\\wwwroot\\js\\site.js",

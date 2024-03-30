@@ -2,7 +2,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Globalization;
-using System.ComponentModel.DataAnnotations;
 
 public class RoomData
 {
@@ -105,12 +104,12 @@ class Program
     {
         DateTime[] dateData = new DateTime[]
         {
-            DateTime.Now.AddDays(1),
-            DateTime.Now.AddDays(2),
-            DateTime.Now.AddDays(3),
-            DateTime.Now.AddDays(4),
-            DateTime.Now.AddDays(5),
-            DateTime.Now.AddDays(6),
+            DateTime.Now.Date.AddDays(1),
+            DateTime.Now.Date.AddDays(2),
+            DateTime.Now.Date.AddDays(3),
+            DateTime.Now.Date.AddDays(4),
+            DateTime.Now.Date.AddDays(5),
+            DateTime.Now.Date.AddDays(6),
         };
         CultureInfo culture = new CultureInfo("en-US");
 
@@ -142,26 +141,153 @@ class Program
 
         if (roomData.Rooms == null)
         {
-            Console.WriteLine("No data found in the file");
-            return;
+            throw new Exception("No data found in the file");
         }
         
         ReservationHandler reservationHandler = new ReservationHandler(roomData, dateData);
-
-        Reservation reservation = new Reservation();
-        reservation.date = dateData[4];
-        reservation.room = roomData.Rooms[3];
-        reservation.time = DateTime.Parse("12:00", culture);
-        reservation.reserverName = "John Weasley";
         
-        reservationHandler.AddReservation(reservation);
+        mainLoop(reservationHandler, roomData, dateData);
 
-        reservationHandler.displayWeeklySchedule();
-
-        reservationHandler.deleteReservation(reservation);
-
-        reservationHandler.displayWeeklySchedule();
     }
+
+    public static void mainLoop(ReservationHandler reservationHandler, RoomData roomData, DateTime[] dateData){
+        Console.WriteLine("----------Welcome to the Reservation System----------");
+        while (true)
+        {
+            Console.WriteLine("1. Add Reservation");
+            Console.WriteLine("2. Delete Reservation");
+            Console.WriteLine("3. Display Weekly Schedule");
+            Console.WriteLine("4. Exit");
+            Console.WriteLine("Enter your choice: ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter the room name: ");
+                    string roomName = Console.ReadLine();
+                    Console.WriteLine("Enter the date (dd.MM.yyyy): ");
+                    string strDate = Console.ReadLine();
+                    DateTime date = checkDate(strDate, dateData);
+                    Console.WriteLine("Enter the time (HH:mm): ");
+                    string strTime = Console.ReadLine();
+                    DateTime time = checkTime(strTime);
+                    Console.WriteLine("Enter the reserver full name: ");
+                    string reserverName = Console.ReadLine();
+                    reserverName = checkName(reserverName);
+                    // Check null or wrong inputs 
+                    
+                    Reservation reservation = new Reservation()
+                    {
+                        time = time,
+                        date = date,
+                        reserverName = reserverName,
+                        room = roomData.Rooms[Array.FindIndex(roomData.Rooms, room => room.roomName == roomName)]
+                    };
+                    reservationHandler.AddReservation(reservation);
+                    Console.WriteLine("Reservation added, You can check the weekly schedule.");
+                    Console.WriteLine();
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the room name: ");
+                    roomName = Console.ReadLine();
+                    roomName = checkRoomName(roomName, roomData);
+                    Console.WriteLine("Enter the date (dd.MM.yyyy): ");
+                    strDate = Console.ReadLine();
+                    date = checkDate(strDate, dateData);
+                    Console.WriteLine("Enter the time (HH:mm): ");
+                    strTime = Console.ReadLine();
+                    time = checkTime(strTime);Console.WriteLine("Enter the reserver full name: ");
+                    reserverName = Console.ReadLine();
+                    reserverName = checkName(reserverName);
+
+                    reservation = new Reservation()
+                    {
+                        time = time,
+                        date = date,
+                        reserverName = reserverName,
+                        room = roomData.Rooms[Array.FindIndex(roomData.Rooms, room => room.roomName == roomName)]
+                    };
+                    reservationHandler.deleteReservation(reservation);
+                    Console.WriteLine("Reservation deleted, You can check the weekly schedule.");
+                    Console.WriteLine();
+                    break;
+                case 3:
+                    reservationHandler.displayWeeklySchedule();
+                    Console.WriteLine();
+                    break;
+                case 4:
+                    return;
+            }
+        }
+    }
+
+    public static string checkName(string name)
+    {
+        if (name == null || name.Length == 0)
+        {
+            Console.WriteLine("Name cannot be empty, Enter again:");
+            name = Console.ReadLine();
+            return checkName(name);
+        }
+
+        return name;
+    }
+
+    public static string checkRoomName(string roomName, RoomData roomData){
+        if (roomName == null || roomName.Length == 0)
+        {
+            Console.WriteLine("Room name cannot be empty, Enter again:");
+            roomName = Console.ReadLine();
+            return checkRoomName(roomName, roomData);
+        }
+        if (Array.FindIndex(roomData.Rooms, room => room.roomName == roomName) == -1)
+        {
+            Console.WriteLine("Room not found, Enter again:");
+            roomName = Console.ReadLine();
+            return checkRoomName(roomName, roomData);
+        }
+        return roomName;
+    }
+
+    public static DateTime checkDate(string date, DateTime[] dateData)
+    {
+        if (date == null || date.Length == 0)
+        {
+            Console.WriteLine("Date cannot be empty, Enter again:");
+            date = Console.ReadLine();
+            return checkDate(date, dateData);
+        }
+        if (!DateTime.TryParseExact(date, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateValue))
+        {
+            Console.WriteLine("Invalid date format, Enter again:");
+            date = Console.ReadLine();
+            return checkDate(date, dateData);
+        }
+        if (Array.IndexOf(dateData, dateValue) == -1){
+            Console.WriteLine("Date not found in the weekly schedule, Enter again:");
+            date = Console.ReadLine();
+            return checkDate(date, dateData);
+        }
+        return DateTime.ParseExact(date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+    }
+
+    public static DateTime checkTime(string time){
+        if (time == null || time.Length == 0)
+        {
+            Console.WriteLine("Time cannot be empty, Enter again:");
+            time = Console.ReadLine();
+            return checkTime(time);
+        }
+        if (!DateTime.TryParseExact(time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime timeValue))
+        {
+            Console.WriteLine("Invalid time format, Enter again:");
+            time = Console.ReadLine();
+            return checkTime(time);
+        }
+        return DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+    }
+
 }
 
 

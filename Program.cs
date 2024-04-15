@@ -125,6 +125,8 @@ class Program
         {
             Console.WriteLine("Error reading file: " + e.Message + "Please check the file path");
         }
+        
+        
 
         var roomData = new RoomData();
 
@@ -146,6 +148,23 @@ class Program
         
         ReservationHandler reservationHandler = new ReservationHandler(roomData, dateData);
         
+        reservationHandler.AddReservation(new Reservation()
+        {
+            time = DateTime.ParseExact("10:00", "HH:mm", culture),
+            date = dateData[0],
+            reserverName = "John Wick",
+            room = roomData.Rooms[0]
+        });
+
+        reservationHandler.AddReservation(new Reservation()
+        {
+            time = DateTime.ParseExact("10:00", "HH:mm", culture),
+            date = dateData[2],
+            reserverName = "Selena Gomez",
+            room = roomData.Rooms[4]
+        });
+
+
         mainLoop(reservationHandler, roomData, dateData);
 
     }

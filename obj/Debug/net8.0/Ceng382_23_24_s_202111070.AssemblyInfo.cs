@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ceng382_23_24_s_202111070")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd0e0ceaa31eddc17c9bb34ef734b9dd5ffd0182")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+521a82b66dacb58517e3f0f501049fc65f8638e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ceng382_23_24_s_202111070")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ceng382_23_24_s_202111070")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

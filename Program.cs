@@ -10,9 +10,9 @@ class Program
     static void Main(string[] args)
     {
 
-        string roomDataPath = Path.Combine("Data", "Data.json");
-        string logDataPath = Path.Combine("Data", "LogData.json");
-        string reservationDataPath = Path.Combine("Data", "ReservationData.json");
+        string roomDataPath = "Data/Data.json";
+        string logDataPath = "Data/LogData.json";
+        string reservationDataPath = "Data/ReservationData.json";
         
         ILogger logger = new FileLogger(logDataPath);
 
@@ -22,8 +22,10 @@ class Program
         
         IReservationService reservationService = new ReservationService(reservationRepository, logger, roomHandler);
 
-
-        reservationService.AddReservation(DateTime.Now, DateTime.Now, "John Doe", roomHandler.GetRooms()[1]);
+        reservationService.AddReservation(DateTime.Now, DateTime.Now, "John Wick", roomHandler.GetRooms()[2]);
+        reservationService.AddReservation(DateTime.Now.AddDays(4), DateTime.Now.AddDays(4), "John Snow", roomHandler.GetRooms()[5]);
+        reservationService.AddReservation(DateTime.Now.AddDays(2), DateTime.Now.AddDays(2), "Tom Cruise", roomHandler.GetRooms()[1]);
+        reservationService.DeleteReservation(reservationRepository.GetAllReservations()[0]);
         reservationService.DisplayWeeklySchedule();
 
         

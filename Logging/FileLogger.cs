@@ -5,31 +5,41 @@ using System.Text.Json;
 namespace ReservationSystem.Logging
 {
     using ReservationSystem.Interfaces;
+    using ReservationSystem.Models;
     public class FileLogger : ILogger
     {
         private readonly string _filePath;
+        private List<LogRecord> _logRecords = new List<LogRecord>();
 
         public FileLogger(string filePath)
         {
             _filePath = filePath;
+            try
+            {
+                if (File.Exists(_filePath))
+                {
+                    string json = File.ReadAllText(_filePath);
+                    _logRecords = JsonSerializer.Deserialize<List<LogRecord>>(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to load logs from file: {ex.Message}");
+            }
         }
 
-        public void Log(string message)
+        // Adjust this method to accept not just a message but also the reservation name and room name
+        public void Log(LogRecord log)
         {
-            var logEntry = new
+            _logRecords.Add(log);
+            string json = JsonSerializer.Serialize(_logRecords, new JsonSerializerOptions
             {
-                Timestamp = DateTime.Now,
-                Message = message
-            };
-
-            string json = JsonSerializer.Serialize(logEntry);
+                WriteIndented = true  // Makes the JSON output easier to read
+            });
 
             try
             {
-                using (StreamWriter streamWriter = new StreamWriter(_filePath, true))
-                {
-                    streamWriter.WriteLine(json);
-                }
+                    File.WriteAllText(_filePath, json);
             }
             catch (Exception ex)
             {

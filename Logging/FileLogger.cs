@@ -14,12 +14,18 @@ namespace ReservationSystem.Logging
         public FileLogger(string filePath)
         {
             _filePath = filePath;
+            loadLogsFromJson();
+        }
+
+        private void loadLogsFromJson(){
             try
             {
                 if (File.Exists(_filePath))
                 {
                     string json = File.ReadAllText(_filePath);
                     _logRecords = JsonSerializer.Deserialize<List<LogRecord>>(json);
+                } else{
+                    _logRecords = new List<LogRecord>();
                 }
             }
             catch (Exception ex)
@@ -28,13 +34,12 @@ namespace ReservationSystem.Logging
             }
         }
 
-        // Adjust this method to accept not just a message but also the reservation name and room name
         public void Log(LogRecord log)
         {
             _logRecords.Add(log);
             string json = JsonSerializer.Serialize(_logRecords, new JsonSerializerOptions
             {
-                WriteIndented = true  // Makes the JSON output easier to read
+                WriteIndented = true 
             });
 
             try
@@ -45,6 +50,7 @@ namespace ReservationSystem.Logging
             {
                 Console.WriteLine($"Failed to log to file: {ex.Message}");
             }
+            loadLogsFromJson();
         }
     }
 }

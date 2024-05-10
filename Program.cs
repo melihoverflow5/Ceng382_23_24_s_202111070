@@ -23,20 +23,46 @@ class Program
         string logDataPath = "Data/LogData.json";
         string reservationDataPath = "Data/ReservationData.json";
         
-        ILogger logger = new FileLogger(logDataPath);
+        FileLogger.Initialize(logDataPath);
 
         IRoomHandler roomHandler = new RoomHandler(roomDataPath);
 
         IReservationRepository reservationRepository = new ReservationRepository(reservationDataPath);
         
-        IReservationService reservationService = new ReservationService(reservationRepository, logger, roomHandler);
+        ReservationService.Initialize(reservationRepository, roomHandler);
 
-        reservationService.AddReservation(DateTime.Now, DateTime.Now, "John Wick", roomHandler.GetRooms()[2]);
-        reservationService.AddReservation(DateTime.Now.AddDays(4), DateTime.Now.AddDays(4), "John Snow", roomHandler.GetRooms()[5]);
-        reservationService.AddReservation(DateTime.Now.AddDays(2), DateTime.Now.AddDays(2), "Tom Cruise", roomHandler.GetRooms()[1]);
-        reservationService.DeleteReservation(reservationRepository.GetAllReservations()[0]);
-        reservationService.DisplayWeeklySchedule();
-
+        ReservationService.AddReservation(DateTime.Now, DateTime.Now, "John Wick", roomHandler.GetRooms()[2]);
+        ReservationService.AddReservation(DateTime.Now.AddDays(4), DateTime.Now.AddDays(4), "John Snow", roomHandler.GetRooms()[5]);
+        ReservationService.AddReservation(DateTime.Now.AddDays(2), DateTime.Now.AddDays(2), "Tom Cruise", roomHandler.GetRooms()[2]);
+        ReservationService.AddReservation(DateTime.Now.AddDays(3), DateTime.Now.AddDays(3), "John Wick", roomHandler.GetRooms()[3]);
         
+        ReservationService.DisplayWeeklySchedule();
+
+        Console.WriteLine("Reservations made by John Wick: ");
+        var johnWickReservations = ReservationService.DisplayReservationByReserver("John Wick");
+        foreach (var reservation in johnWickReservations)
+        {
+            Console.WriteLine($"Date: {reservation.Date.ToString("dd.MM.yyyy")}, Time: {reservation.Time.ToString("HH.mm")}, Room: {reservation.Room.Name}");
+        }
+
+        Console.WriteLine("Reservations made for Room A-103: ");
+        var roomA103Reservations = ReservationService.DisplayReservationByRoomId("003");
+        foreach (var reservation in roomA103Reservations)
+        {
+            Console.WriteLine($"Date: {reservation.Date.ToString("dd.MM.yyyy")}, Time: {reservation.Time.ToString("HH.mm")}, Reserver: {reservation.ReserverName}");
+        }
+
+        Console.WriteLine("Logs by Reserver: John Wick");
+        var johnwicklogs = FileLogger.DisplayLogsByName("John Wick");
+        foreach (var log in johnwicklogs)
+        {
+            Console.WriteLine($"Timestamp: {log.Timestamp}\n Reserver: {log.ReserverName}\n Room: {log.RoomName}\n Message: {log.Message}");
+        }
+        Console.WriteLine("Logs by Date Between today-1 and today");
+        var datelogs = FileLogger.DisplayLogsByDate(DateTime.Now.AddDays(-1), DateTime.Now);
+        foreach (var log in datelogs)
+        {
+            Console.WriteLine($"Timestamp: {log.Timestamp}\n Reserver: {log.ReserverName}\n Room: {log.RoomName}\n Message: {log.Message}");
+        }
     }
 }

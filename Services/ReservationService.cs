@@ -3,22 +3,23 @@ namespace ReservationSystem.Services
     using ReservationSystem.Models;
     using ReservationSystem.Interfaces;
     using System.Linq;
+    using ReservationSystem.Logging;
     using System.Text;
 
-    public class ReservationService : IReservationService
+    public static class ReservationService
     {
-        private readonly IReservationRepository _reservationRepository;
-        private readonly ILogger _logger;
-        private readonly IRoomHandler _roomHandler;
+        private static IReservationRepository _reservationRepository;
+        private static IRoomHandler _roomHandler;
+        private static List<Reservation> reservations;
 
-        public ReservationService(IReservationRepository reservationRepository, ILogger logger, IRoomHandler roomHandler)
+        public static void Initialize(IReservationRepository reservationRepository, IRoomHandler roomHandler)
         {
             _reservationRepository = reservationRepository;
-            _logger = logger;
             _roomHandler = roomHandler;
+            reservations = _reservationRepository.GetAllReservations();
         }
 
-        public void AddReservation(DateTime time, DateTime date, string reserverName, Room room)
+        public static void AddReservation(DateTime time, DateTime date, string reserverName, Room room)
         {
             Reservation reservation = new Reservation(time, date, reserverName, room);
             
@@ -32,7 +33,7 @@ namespace ReservationSystem.Services
                     $"Room {room.Name} does not exist. Reservation could not be created."    
                 );
 
-                _logger.Log(logRecordDNE);
+                FileLogger.Log(logRecordDNE);
                 return;
             }
             if(_reservationRepository.GetAllReservations().Any(r => r.Room == room && r.Date.Date == date.Date))
@@ -44,7 +45,7 @@ namespace ReservationSystem.Services
                     room.Name, 
                     $"Room {room.Name} is already reserved at {time:HH:mm} on {date:yyyy-MM-dd}. Reservation could not created."    
                 );
-                _logger.Log(logRecordAR);
+                FileLogger.Log(logRecordAR);
                 return;
             }
             _reservationRepository.AddReservation(reservation);
@@ -55,10 +56,11 @@ namespace ReservationSystem.Services
                 room.Name, 
                 $"Reservation for {reserverName} at {time:HH:mm} on {date:yyyy-MM-dd} in room {room.Name} was successfully created."    
             );
-            _logger.Log(logRecordSuccess);
+            FileLogger.Log(logRecordSuccess);
+            updateReservations();
         }
 
-        public void DeleteReservation(Reservation reservation)
+        public static void DeleteReservation(Reservation reservation)
         {
             LogRecord logRecord = new LogRecord
             (
@@ -67,11 +69,12 @@ namespace ReservationSystem.Services
                 reservation.Room.Name, 
                 $"Deleting reservation for {reservation.ReserverName} at {reservation.Time:HH:mm} on {reservation.Date:yyyy-MM-dd} in room {reservation.Room.Name}"    
             );
-            _logger.Log(logRecord);
+            FileLogger.Log(logRecord);
             _reservationRepository.DeleteReservation(reservation);
+            updateReservations();
         }
 
-        public void DisplayWeeklySchedule()
+        public static void DisplayWeeklySchedule()
         {
             var now = DateTime.Now.Date;  
             var endOfWeek = now.AddDays(7 - (int)now.DayOfWeek);
@@ -119,5 +122,21 @@ namespace ReservationSystem.Services
 
             Console.WriteLine(sb.ToString());
         }
+        private static void updateReservations()
+        {
+            reservations = _reservationRepository.GetAllReservations();
+        }
+        
+        public static List<Reservation> DisplayReservationByReserver(string reserverName)
+        {
+            var filteredReservations = reservations.Where(r => r.ReserverName.Equals(reserverName,StringComparison.OrdinalIgnoreCase)).ToList();
+            return filteredReservations;    
+        }
+
+        public static List<Reservation> DisplayReservationByRoomId(string roomId)
+        {
+            var filteredReservations = reservations.Where(r => r.Room.Id.Equals(roomId,StringComparison.OrdinalIgnoreCase)).ToList();
+            return filteredReservations;
         }
     }
+}

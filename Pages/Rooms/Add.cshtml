@@ -1,0 +1,18 @@
+@page
+@model ReservationSystem.Pages.Rooms.AddModel
+
+<h1 class="mt-4">Add a New Room</h1>
+
+<form method="post" class="mt-4">
+    <div class="form-group">
+        <label asp-for="Room.RoomName" class="control-label">Room Name</label>
+        <input asp-for="Room.RoomName" class="form-control" placeholder="Enter room name"/>
+        <span asp-validation-for="Room.RoomName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room.Capacity" class="control-label">Capacity</label>
+        <input type="number" asp-for="Room.Capacity" class="form-control" placeholder="Enter capacity"/>
+        <span asp-validation-for="Room.Capacity" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Room</button>
+</form>

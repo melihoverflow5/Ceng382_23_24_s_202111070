@@ -1,0 +1,10 @@
+@page
+@model ReservationSystem.Pages.Rooms.DeleteModel
+
+<h1 class="mt-4">Delete Room</h1>
+
+<form method="post" class="mt-4">
+    <p>Are you sure you want to delete <strong>@Model.Room.RoomName</strong>?</p>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+</form>

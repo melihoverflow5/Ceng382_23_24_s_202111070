@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ReservationSystem.Models;
 namespace ReservationSystem.Data{
     public class AppDbContext : DbContext
     {

@@ -18,7 +18,7 @@ namespace ReservationSystem.Pages.Rooms{
 
         public async Task OnGetAsync()
         {
-            Rooms = await _context.Rooms.ToListAsync();
+            Rooms = await _context.Rooms.OrderBy(r => r.RoomName).ToListAsync();
         }
     }
 }

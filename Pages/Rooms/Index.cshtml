@@ -1,0 +1,35 @@
+@page
+@model ReservationSystem.Pages.Rooms.IndexModel
+
+<div class="container mt-4">
+    <div class="row justify-content-between align-items-center">
+        <div class="col">
+            <h1>Rooms</h1>
+        </div>
+        <div class="col text-right">
+            <a asp-page="./Add" class="btn btn-primary">Add Room</a>
+        </div>
+    </div>
+
+    <table class="table table-hover mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Room Name</th>
+                <th>Capacity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var room in Model.Rooms)
+        {
+            <tr>
+                <td>@room.RoomName</td>
+                <td>@room.Capacity</td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@room.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

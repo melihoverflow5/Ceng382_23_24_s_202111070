@@ -8257,11 +8257,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070.csproj",
+      "projectUniqueName": "C:\\Users\\hacimelih.taskin\\Desktop\\Projects\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070.csproj",
       "projectName": "Ceng382_23_24_s_202111070",
-      "projectPath": "C:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070.csproj",
+      "projectPath": "C:\\Users\\hacimelih.taskin\\Desktop\\Projects\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070.csproj",
       "packagesPath": "C:\\Users\\hacimelih.taskin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\obj\\",
+      "outputPath": "C:\\Users\\hacimelih.taskin\\Desktop\\Projects\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hacimelih.taskin\\AppData\\Roaming\\NuGet\\NuGet.Config"

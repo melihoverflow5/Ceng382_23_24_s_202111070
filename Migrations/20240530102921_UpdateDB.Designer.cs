@@ -12,8 +12,8 @@ using ReservationSystem.Data;
 namespace Ceng382_23_24_s_202111070.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240514125242_AddIdentitySchema")]
-    partial class AddIdentitySchema
+    [Migration("20240530102921_UpdateDB")]
+    partial class UpdateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

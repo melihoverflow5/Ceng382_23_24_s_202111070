@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+BMuyE12Ayly2qUd9wzyMEMqxarf51W8U0ZZ/doyQegGqy5o1NfDudUbd+qShfxkNbP4lbDPuSKspgrk3lEzEg==",
+  "dgSpecHash": "CQwJZRcJA3zP6F6TpCmIcE0JmQ/KPc39Bmvh8e7R3/1KTSAUjMMlnFE6mFghC2pO/93YiQbHdsG66p/6H/LWUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hacimelih.taskin\\Desktop\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070.csproj",
+  "projectFilePath": "C:\\Users\\hacimelih.taskin\\Desktop\\Projects\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070\\Ceng382_23_24_s_202111070.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hacimelih.taskin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\hacimelih.taskin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

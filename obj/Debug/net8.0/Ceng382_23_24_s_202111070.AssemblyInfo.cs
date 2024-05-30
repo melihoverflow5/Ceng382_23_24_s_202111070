@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ceng382_23_24_s_202111070")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ba4eca3741126ca95a0e6cc7b44aa01b68d714f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec590fe9be01657f3dbaddbc3fa88e232d2c4066")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ceng382_23_24_s_202111070")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ceng382_23_24_s_202111070")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,74 @@
+@page
+@model ReservationSystem.Pages.Reservations.IndexModel
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h1>Reservations</h1>
+
+<form method="get">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" class="form-control" value="@Model.CurrentFilterStartDate?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="room">Room</label>
+            <select id="room" name="room" class="form-control" asp-items="Model.RoomList">
+                <option value="">All Rooms</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="capacity">Capacity</label>
+            <select id="capacity" name="capacity" class="form-control" asp-items="Model.CapacityList">
+                <option value="">All Capacities</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a asp-page="/Reservations/Add" class="btn btn-success">Create New Reservation</a>
+</form>
+
+<table class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>Time</th>
+            @for (int i = 0; i < 7; i++)
+            {
+                <th>@Model.CurrentFilterStartDate?.AddDays(i).ToString("dddd, MMM dd")</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (int hour = 0; hour < 24; hour++)
+        {
+            <tr>
+                <td>@hour:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    var date = Model.CurrentFilterStartDate?.Date.AddDays(i).AddHours(hour);
+                    var reservation = Model.Reservations.FirstOrDefault(r => r.ReservationDate == date);
+                    <td>
+                        @if (reservation != null)
+                        {
+                            <div>
+                                <strong>Room:</strong> @Model.RoomNames[reservation.RoomId]<br />
+                                <strong>User:</strong> @Model.UserNames[reservation.UserId]<br />
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@reservation.Id" style="display:inline;">
+                                    <button type="submit" title="Delete" class="btn btn-link p-0" style="color:red;">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+}

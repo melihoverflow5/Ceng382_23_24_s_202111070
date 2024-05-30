@@ -1,0 +1,32 @@
+@page
+@model ReservationSystem.Pages.Reservations.CreateModel
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<h1>Create Reservation</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Reservation.ReservationDate"></label>
+        <input asp-for="Reservation.ReservationDate" class="form-control" type="datetime-local" step="3600" required />
+        <span asp-validation-for="Reservation.ReservationDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Reservation.RoomId"></label>
+        <select asp-for="Reservation.RoomId" class="form-control" asp-items="Model.RoomList" required>
+            <option value="">Select a room</option>
+        </select>
+        <span asp-validation-for="Reservation.RoomId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
